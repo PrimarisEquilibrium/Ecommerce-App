@@ -1,0 +1,21 @@
+<html>
+  <body>
+    <h1>Statistics</h1>
+    <h3>Total Earned: ${{ statistics.total_sales }}</h3>
+    <h3>Average Earned: ${{ statistics.avg_sales }}</h3>
+    <h3>Highest Sale: ${{ statistics.max_sales }}</h3>
+    <h3>Lowest Sale: ${{ statistics.min_sales }}</h3>
+    <ul>
+      {% for order in orders %}
+       <p>
+        {{ order.id }} - {{ order.customer.first_name }} {{ order.customer.last_name }} [Total Orders: {{ order.orderitem_set.all.count }}]
+       </p>
+          {% for item in order.orderitem_set.all %}
+            <li style="margin-left: 50px;">{{ item.product.title }} - {{ item.product.unit_price }}</li>
+          {% endfor %}
+        <p>Total Spent: {{ order.total_spent }}</p>
+        <hr>
+      {% endfor %}
+    </ul>
+  </body>
+</html>
